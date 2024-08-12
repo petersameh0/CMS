@@ -29,7 +29,7 @@ services:
     image: wernight/ngrok:latest
     container_name: ngrok
     environment:
-      NGROK_AUTHTOKEN: 2qPjLMPo7bz2cydBfbz3m_7pzkGZyB2hMVdgkW7jaiz
+      NGROK_AUTHTOKEN: xxxxxxxxxxxxxxxxxxx
       NGROK_PORT: http://wordpress:80
     volumes:
       - ngrok_logs:/home/ngrok/
