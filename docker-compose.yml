@@ -1,6 +1,5 @@
 version: '3.8'
 
-
 services:
   wordpress:
     image: wordpress:latest
@@ -26,38 +25,19 @@ services:
       MYSQL_USER: wordpress
       MYSQL_PASSWORD: wordpress
 
-  nginx:
-    image: nginx:latest
-    container_name: nginx
-    ports:
-      - "443:443"  # SSL
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-    depends_on:
-      - wordpress
   ngrok:
     image: wernight/ngrok:latest
-    deploy:
-      replicas: 1
-      placement:
-        constraints:
-          - node.role == worker
-      restart_policy:
-        condition: on-failure
+    container_name: ngrok
     environment:
-      NGROK_AUTHTOKEN: 2qPjLMPo7bz2cydBfbz3m_7pzkGZyB2hMVdgkW7jaiz
-      NGROK_PORT: 80
-    ports:
-      - "4040:4040"  # Ngrok web interface
-    command: 
-      - bash -c 'ngrok http 80 > /ngrok_logs/ngrok_output.txt 2>&1'
+      NGROK_AUTHTOKEN: xxxxxxxxxxxxxxxxxxx
+      NGROK_PORT: http://wordpress:80
     volumes:
-      - ./ngrok.conf:/ngrok_logs/ngrok_output.txt
-    
-    
+      - ngrok_logs:/home/ngrok/
+    depends_on:
+      - wordpress
 
 
 volumes:
   wordpress_data:
   db_data:
-
+  ngrok_logs:
