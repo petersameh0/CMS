@@ -45,7 +45,7 @@ services:
       restart_policy:
         condition: on-failure
     environment:
-      NGROK_AUTHTOKEN: 2qPjLMPo7bz2cydBfbz3m_7pzkGZyB2hMVdgkW7jaiz
+      NGROK_AUTHTOKEN: xxxx
       NGROK_PORT: 80
     ports:
       - "4040:4040"  # Ngrok web interface
